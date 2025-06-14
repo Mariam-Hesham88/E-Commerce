@@ -1,0 +1,41 @@
+@if (productsList ) {
+  <section class=" bg-main-light rounded-4 shadow p-4 my-2 w-75 mx-auto">
+
+    <div class=" d-flex align-items-center justify-content-between ">
+      <h1 class=" h2">My wish List</h1>
+
+
+    </div>
+
+
+
+  @for (item of productsList; track item.id ) {
+    <div class="row mb-1 border-bottom m-0">
+      <div class="col-md-1">
+        <div>
+          <img [src]="item.imageCover" class="w-100" [alt]="item.title">
+        </div>
+      </div>
+
+      <div class="col-md-11 d-flex align-items-center justify-content-between">
+        <div>
+          <h3 class="h5">{{item.title }}</h3>
+          <p class="text-main">Price: {{item.price}}</p>
+
+          <button (click)="confirmBox(item.id)" class="text-danger border-0  cr btn p-0 d-flex align-items-center justify-content-center" ><i class="fa-solid fa-trash"></i>
+          <h3 class="h6 mt-1 text-danger ms-2">remove</h3>
+          </button>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+         <button (click)="addToCart(item._id)" class=" cr border-1 rounded-2 btn-green p-2  ">Add To Cart </button>
+        </div>
+
+      </div>
+    </div>
+  }
+
+
+  </section>
+
+}

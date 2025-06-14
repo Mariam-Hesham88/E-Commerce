@@ -2,14 +2,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
 
+// carousel
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+// toaster => alerts
+@import 'ngx-toastr/toastr';
+
 :root {
-    --main-color: #0aad0a;
+    //--main-color: #0aad0a;
+    --main-color: #FFD700;
+    --second-color : #FFFF00;
     --light-color: #f0f3f2;
     --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
         rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
         rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
     --font-family: "Encode Sans Expanded", sans-serif;
-    --rating-color: #ffc908;
+    --rating-color: #ffc908eb;
 }
 
 body {
@@ -36,8 +45,16 @@ body {
 
 a,
 a:hover {
-    color: black;
+    color: #fff;
     text-decoration: none;
+}
+
+.second-color{
+    color: var(--second-color);
+}
+
+.text-bold{
+    font-weight: 800;
 }
 
 .product {
@@ -48,8 +65,17 @@ a:hover {
 }
 
 .product:hover {
-    box-shadow: 0 0 10px #11bd1168;
+    box-shadow: 0 0 10px var(--main-color);
 }
+
+// .product button{
+//     transform: translateY(120%);
+//     transition: transform 0.5s;
+// }
+
+// .product:hover button{
+//     transform: translateY(0%);
+// }
 
 .font-sm {
     font-size: 12px;
@@ -87,5 +113,10 @@ a:hover {
 }
 
 .btn-main:hover {
-    background-color: #11bd11;
+    background-color: var(--second-color);
+    color: #fff;
+}
+
+input:focus {
+    border: solid 2px var(--main-color);
 }

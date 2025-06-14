@@ -1,1 +1,14 @@
-<p>categories works!</p>
+<section class="py-5">
+    <div class="container">
+        <div class="row g-3">
+            @for (item of categoriesList(); track $index) {
+            <div class="col-md-3 cr">
+                <div class="shadow product p-3 text-center ">
+                    <img [src]="item.image" class="w-100" height="300px" [alt]="item.name">
+                    <h1 class="h5 text-main p-2"> {{item.slug}}</h1>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,1 +1,43 @@
-<p>cart works!</p>
+<section class="bg-body-secondary my-4 p-4 rounded-2 w-75 mx-auto">
+    <div class="d-flex justify-content-between align-items-center ">
+        <h1 class="h3">Shop Cart :</h1>
+        @if(cartProductList.totalCartPrice > 0)
+        {
+            <button class="btn btn-outline-danger" (click)="clearAllProducts()">Clear All Cart</button>
+        }
+    </div>
+    <p class="text-main text-bold">Total Cart Price : {{ cartProductList.totalCartPrice | currency:'GBP'}}</p>
+    @if (cartProductList.totalCartPrice > 0) {
+        @for (product of cartProductList.products; track product.product.id) {
+            <div class="row d-flex justify-content-between align-content-center ">
+                <!-- image -->
+                <div class="col-md-1">
+                    <div>
+                        <img [routerLink]="['/details', product.product.id]" class="w-100 cr" [src]="product.product.imageCover" [alt]="product.product.title">
+                    </div>
+                </div>
+    
+                <!-- Product Information -->
+                <div class="col-md-11 d-flex justify-content-between align-items-center">
+                        <div class="">
+                            <h3 [routerLink]="['/details', product.product.id]" class="h5 cr">{{product.product.title}}</h3>
+                            <p class="text-main text-bold mb-0">Price : {{product.price |currency:'GBP'}}</p>
+                            <button class="btn p-0 text-danger cr" (click)="deleteSpecificProduct(product.product.id)"><i class="fa-solid fa-trash"></i>Remove</button>
+                        </div>
+                        <div class="d-flex align-items-center gab-2">
+                            <span (click)="updateCount(product.product.id, product.count + 1)" class="text-main cr"><i class="fa-solid fa-circle-plus fa-xl"></i></span>
+                            <span class="py-2"> {{product.count}} </span> 
+                            <span (click)="updateCount(product.product.id, product.count - 1)" class="text-main cr"><i class="fa-solid fa-circle-minus fa-xl"></i></span>
+                        </div>
+                </div>
+            </div>
+            <hr>
+        }
+        <button class="btn btn-main mt-2" [routerLink]="['/orders',cartProductList._id]">Order</button>
+    }@else {
+        <div class="d-flex justify-content-center flex-wrap">
+            <h2 class="w-100 text-center">Your Cart Is Empty</h2>
+            <a class="btn btn-main" [routerLink]="['/home']" routerLinkActive="router-link-active" >Go To Shoping</a>
+        </div>
+    }
+</section>

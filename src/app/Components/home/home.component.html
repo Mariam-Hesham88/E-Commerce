@@ -1,1 +1,125 @@
-<p>home works!</p>
+<!-- Hero Section -->
+<section class="vh-100">
+    <div class="row d-flex justify-content-between align-content-center ">
+        <div class="col-6 d-flex justify-content-center align-items-center">
+            <div class="">
+                <P class="lead w-100 ">The Fasster The Better</P>
+                <h1 class="hero-p">FAST, SAVE, AND SECURE DELIVERY</h1>
+                <ul class="d-flex justify-content-start hero-ul ps-0">
+                    <li class="p-2">
+                        <i class="fa-solid fa-truck text-main"></i> Customer-Deriven
+                    </li>
+                    <li class="p-2">
+                        <i class="fa-solid fa-business-time text-main"></i> Time-Bound
+                    </li>
+                    <li class="p-2">
+                        <i class="fa-solid fa-shield-heart text-main"></i> Safety
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <img src="../../../assets/images/deleveryman.png" class="w-75" alt="delivery-man">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Curosul -->
+<!-- <section class="pt-4">
+    <div class="row g-0">
+        <div class="col-9">
+            <owl-carousel-o [options]="customOptionsMain">
+                <ng-template carouselSlide><img src="./assets/images/slider-image-1.jpeg" height="400" class="w-100"
+                        alt=""></ng-template>
+                <ng-template carouselSlide><img src="./assets/images/slider-image-2.jpeg" height="400" class="w-100"
+                        alt=""></ng-template>
+                <ng-template carouselSlide><img src="./assets/images/slider-image-3.jpeg" height="400" class="w-100"
+                        alt=""></ng-template>
+                <ng-template carouselSlide><img src="./assets/images/blog-img-1.jpeg" height="400" class="w-100"
+                        alt=""></ng-template>
+                <ng-template carouselSlide><img src="./assets/images/blog-img-2.jpeg" height="400" class="w-100"
+                        alt=""></ng-template>
+                <ng-template carouselSlide><img src="./assets/images/slider-2.jpeg" height="400" class="w-100"
+                        alt=""></ng-template>
+            </owl-carousel-o>
+        </div>
+        <div class="col-3">
+            <img src="./assets/images/grocery-banner.png" height="200" class="w-100" alt="">
+            <img src="./assets/images/grocery-banner-2.jpeg" height="200" class="w-100" alt="">
+        </div>
+    </div>
+</section> -->
+
+<!-- Category -->
+<section>
+    <h2 class="text-main py-3 text-bold">Popular Categories</h2>
+    <owl-carousel-o [options]="customOptionsCategories">
+        @for (category of categoryList(); track category._id) {
+        <ng-template carouselSlide>
+            <div>
+                <img [src]="category.image" height="300px" class="w-100" [alt]="category.name">
+                <h3 class="text-secondary text-bold h5">{{category.name}}</h3>
+            </div>
+        </ng-template>
+        }
+    </owl-carousel-o>
+</section>
+
+<!-- Some Product  -->
+<section class="pt-4">
+    <h2 class="text-main py-3 text-bold">Popular Products</h2>
+    <div class="row g-4 py-4">
+        @for (product of ProductList().slice(18,33); track product.id) {
+        <div class="col-md-2 cr">
+            <div class="product p-2">
+                <div [routerLink]="['/details', product.id]">
+                    <img [src]="product.imageCover" class="w-100 rounded-1" [alt]="product.title">
+                    <h3 class="small ">{{product.category.name | uppercase | termtext:1}} </h3>
+                    <h4 class="h6">{{product.title | termtext:2 }}</h4>
+                    <div class=" ">
+                        <span class="h4">{{product.price | currency : 'GBP'}} </span>
+                        <div>
+                            <span>
+                                @for (item of [1, 2, 3, 4, 5].slice(0, product.ratingsAverage); track $index)
+                                {
+                                <i class="fa fa-star rating-color"></i>
+                                }
+
+                                @if(product.ratingsAverage % 1 !== 0){
+                                <i class="fa-solid fa-star-half-stroke rating-color"></i>
+                                @for (item of [1, 2, 3, 4, 5].slice(product.ratingsAverage +1, 5); track $index)
+                                {
+                                <i class="fa-regular fa-star rating-color"></i>
+                                }
+                                }
+                                @else if (product.ratingsAverage % 1 === 0) {
+                                @for (item of [1, 2, 3, 4, 5].slice(product.ratingsAverage, 5); track $index)
+                                {
+                                <i class="fa-regular fa-star rating-color"></i>
+                                }
+                                }
+                            </span>
+                            <span class="">{{product.ratingsAverage}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-around align-items-center mt-2">
+                    <button class="w-75 p-1 btn-main" (click)="addToCart(product._id)">Add To Cart</button>
+                    <!-- <i class="fa-regular fa-heart text-main cr"></i> -->
+                    <!-- <i class="fa-solid fa-heart text-main cr"></i> -->
+                    <span>
+                        @if (wishId.includes(product.id)) {
+                        <i class="fa-regular fa-heart fa-xl cr text-danger "></i>
+
+                        }@else{
+                        <i (click)="addWishList(product.id)" class="fa-regular fa-heart fa-xl cr  text-main "></i>
+                        }
+                    </span>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</section>

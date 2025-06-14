@@ -1,0 +1,54 @@
+<section class="my-5 p-4 form mx-auto w-50">
+            <h2 class="text-main text-center">Shipping Address</h2>
+            <form [formGroup]="orderForm" (ngSubmit)="orderSumbit()">
+                <div class="m-2">
+                    <label for="details">Details :</label>
+                    <textarea formControlName="details" name="details" id="details" class="form-control"></textarea>
+                    @if(orderForm.get('details')?.errors && (orderForm.get('details')?.touched ||
+                            orderForm.get('details')?.dirty)){
+                            <div class="alert alert-danger">
+                                @if(orderForm.get('details')?.getError('required')){
+                                <p class="m-0">Details Is Required</p>
+                                }
+                            </div>
+                            }
+                </div>
+        
+                <div class="m-2">
+                    <label for="phone">Phone :</label>
+                    <input
+                        [ngClass]="{
+                            'is-valid': !orderForm.get('phone')?.errors && (orderForm.get('phone')?.touched || orderForm.get('phone')?.dirty),
+                            'is-invalid': orderForm.get('phone')?.errors && (orderForm.get('phone')?.touched || orderForm.get('phone')?.dirty)}"
+                        type="text" id="phone" formControlName="phone" class="form-control">
+                    @if(orderForm.get('phone')?.errors && (orderForm.get('phone')?.touched ||
+                    orderForm.get('phone')?.dirty)){
+                    <div class="alert alert-danger">
+                        @if(orderForm.get('phone')?.getError('required')){
+                        <p class="m-0">Phone Is Required</p>
+                        }
+                        @else if(orderForm.get('phone')?.getError('pattern')){
+                        <p class="m-0">Accept only egypt phone numbers</p>
+                        }
+                    </div>
+                    }
+                </div>
+        
+                <div class="m-2">
+                    <label for="city">City :</label>
+                    <input formControlName="city" type="text" name="city" id="city" class="form-control">
+                    @if(orderForm.get('city')?.errors && (orderForm.get('city')?.touched ||
+                            orderForm.get('city')?.dirty)){
+                            <div class="alert alert-danger">
+                                @if(orderForm.get('city')?.getError('required')){
+                                <p class="m-0">City Is Required</p>
+                                }
+                            </div>
+                            }
+                </div>
+
+                <button class="btn btn-main mt-2 w-100" [disabled]="orderForm.invalid">Check Out</button>
+            </form>
+
+
+</section>
